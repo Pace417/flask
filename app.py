@@ -2,6 +2,18 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+@app.route("/signup")
+def signUp():
+    if request.method== "GET":
+        return render_template("signup.html")
+    else:
+        f = open("login.txt", "w")
+        f.write(Username = request.form["name"] + "\n")
+        f.write(Password = request.form["password"])
+        f.close()
+    return "Signup succesful"
+
+
 @app.route("/", methods=["GET", "POST"])
 def hello_world():
     if request.method == "GET":
