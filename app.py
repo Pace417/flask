@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route("signup.html")
+@app.route("/signup", methods=["GET", "POST"])
 def signUp():
     if request.method== "GET":
         return render_template("signup.html")
@@ -20,7 +20,10 @@ def hello_world():
         return render_template("index.html")
     else:
         name = request.form["name"]
-        password = request.form["password"]        
+        password = request.form["password"]
+        f = open("login.txt", "r")
+        un = f.readline().strip()
+        pw = f.readline()
         if password == "wewq":
             return 'Hello ' + name
         else:
