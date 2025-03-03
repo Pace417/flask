@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, hashlib
 
 app = Flask(__name__)
+h=hashlib.new("SHA256")
 
 @app.route("/signup", methods=["GET", "POST"])
 def signUp():
