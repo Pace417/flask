@@ -1,27 +1,36 @@
 from flask import Flask, render_template, request
-import hashlib, sqlite3
-
+import hashlib, sqlite3, datetime
 app = Flask(__name__)
 h=hashlib.new("SHA256")
+
 con = sqlite3.connect("database.db")
 cur = con.cursor()
 cur.execute("""
             CREATE TABLE IF NOT EXISTS userInfo(
             username VARCHAR(35) NOT NULL PRIMARY KEY,
             password VARCHAR(20) NOT NULL,
-            joinedDate DATETIME,
+            joinedDate DATETIME default CURRENT_TIMESTAMP,
             accStatus BOOLEAN
             )
 """)
+
+def get_db_connection():
+    con = sqlite3.connect("database.db")
+    con.row_factory = sqlite3.Row
+    return con
+
 @app.route("/signup", methods=["GET", "POST"])
 def signUp():
     if request.method== "GET":
         return render_template("signup.html")
     else:
-        cur.execute(""" INSERT INTO userInfo(username, password, joinedDate, accStatus)
-                        VALUES (?, ?, ?, ?)""",
-                    (name,password,GETDATE(),1))
+        con = sqlite3.connect("database.db")
+        cur = con.cursor()
+        cur.execute(""" INSERT INTO userInfo (username, password, accStatus)
+                        VALUES (?, ?, ?)""",
+                    (request.form["name"],request.form["password"],1))
         con.commit()
+        con.close()
     return "Signup succesful"
 
 
