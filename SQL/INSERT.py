@@ -1,5 +1,5 @@
 import sqlite3
-con = sqlite3.connect("database.db")
+con = sqlite3.connect("databaseExample.db")
 cur = con.cursor()
 cur.execute(""" INSERT INTO Employee(EmpID, EmpName, HireDate, Salary)
                 VALUES (1122, "Bloggs", "#1/1/2001#", 18000)

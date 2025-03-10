@@ -1,5 +1,5 @@
 import sqlite3
-con = sqlite3.connect("database.db")
+con = sqlite3.connect("databaseExample.db")
 cur = con.cursor()
 cur.execute("""
             CREATE TABLE Employee(
