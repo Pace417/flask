@@ -14,11 +14,6 @@ cur.execute("""
             )
 """)
 
-def get_db_connection():
-    con = sqlite3.connect("database.db")
-    con.row_factory = sqlite3.Row
-    return con
-
 @app.route("/signup", methods=["GET", "POST"])
 def signUp():
     if request.method== "GET":
